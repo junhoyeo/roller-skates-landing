@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
 const translateNormal = (x: number, y: number) =>
@@ -40,8 +40,12 @@ export const Header = () => {
           by @junhoyeo
         </Author>
       </Description>
-      <Button>View in GitHub</Button>
-      <ButtonReflection />
+      <AnimatedButtonContainer
+        style={{ transform: position.to(translateNormal) }}
+      >
+        <Button>View in GitHub</Button>
+        <ButtonReflection />
+      </AnimatedButtonContainer>
     </Container>
   );
 };
@@ -109,6 +113,7 @@ const Author = styled.a`
   }
 `;
 
+const AnimatedButtonContainer = styled(animated.div)``;
 const Button = styled.button`
   margin-top: 36px;
   border-radius: 36px;
@@ -135,7 +140,6 @@ const ButtonReflection = styled.div`
   background-image: linear-gradient(to right, #ff73bb, #76fffd);
   opacity: 1;
   position: relative;
-  transition: all 0.5s ease-in-out;
 
   &:before {
     content: '';
@@ -145,8 +149,7 @@ const ButtonReflection = styled.div`
     top: 0;
     left: -2px;
     right: -2px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), white 50%);
-    backdrop-filter: blur(64px);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), white 50%);
     border-radius: 36px;
   }
 `;
