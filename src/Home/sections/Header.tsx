@@ -43,7 +43,9 @@ export const Header = () => {
       <AnimatedButtonContainer
         style={{ transform: position.to(translateNormal) }}
       >
-        <Button>View in GitHub</Button>
+        <a href="https://github.com/junhoyeo/skates" target="_blank">
+          <Button>View in GitHub</Button>
+        </a>
         <ButtonReflection />
       </AnimatedButtonContainer>
     </Container>
