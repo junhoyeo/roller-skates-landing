@@ -10,6 +10,9 @@ export const Header = () => {
         <TitleSegment>that all designers deserve</TitleSegment>
       </Title>
       <Tagline>@skates</Tagline>
+      <Author href="https://github.com/junhoyeo" target="_blank">
+        by @junhoyeo
+      </Author>
       <Button>View in GitHub</Button>
       <ButtonReflection />
     </Container>
@@ -59,6 +62,19 @@ const Tagline = styled.p`
   text-align: center;
   color: black;
   font-size: 1.85rem;
+`;
+const Author = styled.a`
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #ced4da;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: #bdc1c5;
+    transform: scale(1.05);
+  }
 `;
 
 const Button = styled.button`
