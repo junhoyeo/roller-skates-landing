@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
+
+const translateNormal = (x: number, y: number) =>
+  `translate3d(${x / 24}px,${y / 24}px,0)`;
+const translateSlow = (x: number, y: number) =>
+  `translate3d(${x / 32}px,${y / 32}px,0)`;
 
 export const Header = () => {
+  const [{ position }, set] = useSpring(() => ({
+    position: [0, 0],
+    config: { mass: 10, tension: 550, friction: 140 },
+  }));
+
+  const onMouseMoveInsideContainer = useCallback(
+    ({ clientX: x, clientY: y }) =>
+      set({
+        position: [
+          x - window.innerWidth / 2, //
+          y - window.innerHeight / 2,
+        ],
+      }),
+    [],
+  );
+
   return (
-    <Container>
-      <Emoji src="/images/roller-skate-emoji.png" />
-      <Title>
+    <Container onMouseMove={onMouseMoveInsideContainer}>
+      <Emoji
+        src="/images/roller-skate-emoji.png"
+        style={{ transform: position.to(translateNormal) }}
+      />
+      <Title style={{ transform: position.to(translateSlow) }}>
         <TitleSegment>The color module</TitleSegment>{' '}
         <TitleSegment>that all designers deserve</TitleSegment>
       </Title>
-      <Tagline>@skates</Tagline>
-      <Author href="https://github.com/junhoyeo" target="_blank">
-        by @junhoyeo
-      </Author>
+      <Description style={{ transform: position.to(translateNormal) }}>
+        <Tagline>@skates</Tagline>
+        <Author href="https://github.com/junhoyeo" target="_blank">
+          by @junhoyeo
+        </Author>
+      </Description>
       <Button>View in GitHub</Button>
       <ButtonReflection />
     </Container>
@@ -25,14 +52,14 @@ const Container = styled.header`
   align-items: center;
 `;
 
-const Emoji = styled.img`
+const Emoji = styled(animated.img)`
   margin-top: 64px;
   width: 148px;
   height: 148px;
   filter: drop-shadow(0px 4px 8px rgba(12, 26, 54, 0.3));
 `;
 
-const Title = styled.h1`
+const Title = styled(animated.h1)`
   margin: 0;
   margin-top: 24px;
   display: flex;
@@ -55,6 +82,11 @@ const TitleSegment = styled.span`
   }
 `;
 
+const Description = styled(animated.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const Tagline = styled.p`
   margin: 0;
   margin-top: 16px;
@@ -107,7 +139,7 @@ const ButtonReflection = styled.div`
 
   &:before {
     content: '';
-    height: 100%;
+    height: 65px;
     width: 224px;
     position: absolute;
     top: 0;
