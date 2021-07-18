@@ -35,7 +35,7 @@ export const Header = () => {
         <TitleSegment>that all designers deserve</TitleSegment>
       </Title>
       <Description style={{ transform: position.to(translateNormal) }}>
-        <Tagline>@skates</Tagline>
+        <Tagline>@roller-skates</Tagline>
         <Author href="https://github.com/junhoyeo" target="_blank">
           by @junhoyeo
         </Author>
@@ -43,7 +43,7 @@ export const Header = () => {
       <AnimatedButtonContainer
         style={{ transform: position.to(translateNormal) }}
       >
-        <a href="https://github.com/junhoyeo/skates" target="_blank">
+        <a href="https://github.com/junhoyeo/roller-skates" target="_blank">
           <Button>View in GitHub</Button>
         </a>
         <ButtonReflection />
